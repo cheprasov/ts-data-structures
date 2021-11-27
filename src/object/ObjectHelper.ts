@@ -33,6 +33,24 @@ export class ObjectHelper {
         return newObj;
     }
 
+    static filter<V = any, O extends { [key: string]: V } = { [key: string]: V }>(
+        obj: O,
+        callback: (value: V, key: keyof O, obj: O) => boolean,
+    ): Partial<Record<keyof O, V>> {
+        const newObj = {} as Partial<Record<keyof O, V>>;
+
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            if (callback(obj[key], key, obj)) {
+                newObj[key] = obj[key];
+            }
+        }
+
+        return newObj;
+    }
+
     static forEach<V = any, O extends { [key: string]: V } = { [key: string]: V }>(
         obj: O,
         callback: (value: V, key: keyof O, obj: O) => void,
@@ -73,6 +91,14 @@ export class ObjectHelper {
             }
         }
         return true;
+    }
+
+    static deepCopy<O extends { [key: string]: any } = { [key: string]: any }>(obj: O): O {
+        const copiedObj = {} as O;
+        const itemsForCheck: any[] = [obj];
+        const itemsForCopy: any[] = [];
+        // todo
+        return copiedObj;
     }
 
 }
