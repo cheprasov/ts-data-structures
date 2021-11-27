@@ -1,33 +1,78 @@
+export class ObjectHelper {
 
+    static reduce<A, V = any, O extends { [key: string]: V } = { [key: string]: V }>(
+        obj: O,
+        callback: (accumulator: A, value: V, key: keyof O, obj: O) => A,
+        initialValue: A,
+    ): A {
+        let res = initialValue;
 
-export const forEach = <T extends { [key: string]: any }>(obj: T, callback: Function) => {
-    for (let k in obj) {
-        if (!obj.hasOwnProperty(k)) {
-            continue;
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            res = callback(res, obj[key], key, obj);
         }
-        callback(obj[k], k, obj);
+
+        return res;
     }
-};
 
-export const some = <T extends { [key: string]: any }>(obj: T, callback: Function) => {
-    for (let k in obj) {
-        if (!obj.hasOwnProperty(k)) {
-            continue;
+    static map<R, V = any, O extends { [key: string]: V } = { [key: string]: V }>(
+        obj: O,
+        callback: (value: V, key: keyof O, obj: O) => R,
+    ): Record<keyof O, R> {
+        const newObj = {} as Record<keyof O, R>;
+
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            newObj[key] = callback(obj[key], key, obj);
         }
-        if (callback(obj[k], k, obj)) {
-            return true;
+
+        return newObj;
+    }
+
+    static forEach<V = any, O extends { [key: string]: V } = { [key: string]: V }>(
+        obj: O,
+        callback: (value: V, key: keyof O, obj: O) => void,
+    ): void {
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            callback(obj[key], key, obj);
         }
     }
-};
 
-export const every = <T extends { [key: string]: any }>(obj: T, callback: Function) => {
-    for (let k in obj) {
-        if (!obj.hasOwnProperty(k)) {
-            continue;
+    static some<V = any, O extends { [key: string]: V } = { [key: string]: V }>(
+        obj: O,
+        callback: (value: V, key: keyof O, obj: O) => boolean,
+    ): boolean {
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) {
+                continue;
+            }
+            if (callback(obj[key], key, obj)) {
+                return true;
+            }
         }
-        if (!callback(obj[k], k, obj)) {
-            return false;
-        }
+        return false;
     }
-    return true;
-};
+
+    static every<V = any, O extends { [key: string]: V } = { [key: string]: V }>(
+        obj: O,
+        callback: (value: V, key: keyof O, obj: O) => boolean,
+    ): boolean {
+        for (let k in obj) {
+            if (!obj.hasOwnProperty(k)) {
+                continue;
+            }
+            if (!callback(obj[k], k, obj)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}
