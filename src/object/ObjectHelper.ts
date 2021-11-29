@@ -82,23 +82,15 @@ export class ObjectHelper {
         obj: O,
         callback: (value: V, key: keyof O, obj: O) => boolean,
     ): boolean {
-        for (let k in obj) {
-            if (!obj.hasOwnProperty(k)) {
+        for (let key in obj) {
+            if (!obj.hasOwnProperty(key)) {
                 continue;
             }
-            if (!callback(obj[k], k, obj)) {
+            if (!callback(obj[key], key, obj)) {
                 return false;
             }
         }
         return true;
-    }
-
-    static deepCopy<O extends { [key: string]: any } = { [key: string]: any }>(obj: O): O {
-        const copiedObj = {} as O;
-        const itemsForCheck: any[] = [obj];
-        const itemsForCopy: any[] = [];
-        // todo
-        return copiedObj;
     }
 
 }
