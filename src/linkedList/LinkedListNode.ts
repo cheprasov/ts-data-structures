@@ -1,12 +1,12 @@
 import { Nullable } from '../types/Nullable';
 
-class LinkedListNode<T> {
+export default class LinkedListNode<T> {
 
-    protected _nextNode: Nullable<LinkedListNode<any>>
+    protected _nextNode: Nullable<LinkedListNode<T>>
 
     protected _data: T;
 
-    constructor(data: T, nextNode: Nullable<LinkedListNode<any>> = null) {
+    constructor(data: T, nextNode: Nullable<LinkedListNode<T>> = null) {
         this._nextNode = nextNode;
         this._data = data;
     }
@@ -15,7 +15,11 @@ class LinkedListNode<T> {
         return this._data;
     }
 
-    getNextNode(): Nullable<LinkedListNode<any>> {
+    setNextNode(node: Nullable<LinkedListNode<T>>): Nullable<LinkedListNode<T>> {
+        return this._nextNode = node;
+    }
+
+    getNextNode(): Nullable<LinkedListNode<T>> {
         return this._nextNode;
     }
 }
