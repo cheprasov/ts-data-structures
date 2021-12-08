@@ -1,4 +1,6 @@
-export default class StackArrayBased<T> {
+import StackInterface from './StackInterface';
+
+export default class StackArrayBased<T> extends StackInterface<T> {
 
   protected _items: T[];
 
