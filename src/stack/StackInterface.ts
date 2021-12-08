@@ -1,7 +1,7 @@
-export default abstract class StackInterface {
+export default abstract class StackInterface<T> {
 
-  abstract push(item: any): void;
+  abstract push(item: T): void;
 
-  abstract pop(): any;
+  abstract pop(): T;
 
 }
