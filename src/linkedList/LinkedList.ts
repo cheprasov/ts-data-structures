@@ -25,6 +25,22 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
     }
 
     // Complexity: O(1)
+    popBeg(): T | undefined {
+        if (!this._firstNode) {
+            return undefined;
+        }
+
+        const node = this._firstNode();
+        if (this._lastNode === node) {
+            this._firstNode = null;
+            this._lastNode = null;
+        } else {
+            this._firstNode = node.getNextNode();
+        }
+        this._count -= 1;
+    }
+
+    // Complexity: O(1)
     pushEnd(item: T): void {
         const newNode = new LinkedListNode(item);
         if (this._lastNode) {
