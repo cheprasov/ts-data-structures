@@ -13,6 +13,18 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
     }
 
     // Complexity: O(1)
+    pushBeg(item: T): void {
+        const newNode = new LinkedListNode(item);
+        if (this._firstNode) {
+            newNode.setNextNode(this._firstNode);
+        } else {
+            this._lastNode = newNode;
+        }
+        this._firstNode = newNode;
+        this._count += 1;
+    }
+
+    // Complexity: O(1)
     pushEnd(item: T): void {
         const newNode = new LinkedListNode(item);
         if (this._lastNode) {
@@ -52,6 +64,7 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
         return node.getData();
     }
 
+    // Complexity: O(1)
     getSize(): number {
         return this._count;
     }
