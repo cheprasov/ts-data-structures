@@ -23,7 +23,7 @@ export default class DoublyLinkedListNode<T> {
     }
 
     setPrevNode(node: Nullable<DoublyLinkedListNode<T>>): void {
-        return this._prevNode = node;
+        this._prevNode = node;
     }
 
     getPrevNode(): Nullable<DoublyLinkedListNode<T>> {
@@ -31,7 +31,7 @@ export default class DoublyLinkedListNode<T> {
     }
 
     setNextNode(node: Nullable<DoublyLinkedListNode<T>>): void {
-        return this._nextNode = node;
+        this._nextNode = node;
     }
 
     getNextNode(): Nullable<DoublyLinkedListNode<T>> {
