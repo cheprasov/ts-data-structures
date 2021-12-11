@@ -15,8 +15,8 @@ export default class LinkedListNode<T> {
         return this._data;
     }
 
-    setNextNode(node: Nullable<LinkedListNode<T>>): Nullable<LinkedListNode<T>> {
-        return this._nextNode = node;
+    setNextNode(node: Nullable<LinkedListNode<T>>): void {
+        this._nextNode = node;
     }
 
     getNextNode(): Nullable<LinkedListNode<T>> {
