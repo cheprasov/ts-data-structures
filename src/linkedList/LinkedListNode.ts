@@ -1,4 +1,4 @@
-import { Nullable } from '../types/Nullable';
+import type { Nullable } from '../types/Nullable';
 
 export default class LinkedListNode<T> {
 

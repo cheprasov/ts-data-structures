@@ -1,6 +1,7 @@
-import LinkedListInterface form './LinkedListInterface';
-import { Nullable } from '../types/Nullable';
+import LinkedListInterface from './LinkedListInterface';
 import LinkedListNode from './LinkedListNode';
+
+import type { Nullable } from '../types/Nullable';
 
 export default class LinkedList<T> extends LinkedListInterface<T> {
 
@@ -30,7 +31,7 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
             return undefined;
         }
 
-        const node = this._firstNode();
+        const node = this._firstNode;
         if (this._lastNode === node) {
             this._firstNode = null;
             this._lastNode = null;
@@ -51,7 +52,7 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
     }
 
     // Complexity: O(n)
-    popEnd(item: T): T | undefined {
+    popEnd(): T | undefined {
         if (!this._firstNode || !this._lastNode) {
             return undefined;
         }
