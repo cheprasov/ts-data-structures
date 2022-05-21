@@ -60,35 +60,35 @@ export const copyType = <T>(variable: T):
         if (variable instanceof Boolean) {
             return new Boolean(variable.valueOf());
         }
-        if (variable.constructor instanceof Date) {
-            return new Boolean(variable.valueOf());
-        }
+        // if (variable.constructor instanceof Date) {
+        //     return new Boolean(variable.valueOf());
+        // }
     }
 }
 
-export const deepCopy = <T>(source: T): T => {
-    if (isPrimitive(source)) {
-        return source;
-    }
-    const copiedObj = {} as O;
-    const itemsForCopy: { item: any, target: any }[] = [{ item: obj, target: copiedObj }];
+// export const deepCopy = <T>(source: T): T => {
+//     if (isPrimitive(source)) {
+//         return source;
+//     }
+//     const copiedObj = {} as O;
+//     const itemsForCopy: { item: any, target: any }[] = [{ item: obj, target: copiedObj }];
 
-    while (itemsForCopy.length) {
-        const { item, target } = itemsForCopy.pop()!;
-        if (typeof item === 'object' && item) {
-            for (let key in item) {
-                if (!item.hasOwnProperty(key)) {
-                    continue;
-                }
-                const value = item[key];
-                if (isPrimitive(value)) {
-                    target[key] = value;
-                } else {
-                    itemsForCopy.push({ item: value, target: target })
-                }
-            }
-        }
-    }
+//     while (itemsForCopy.length) {
+//         const { item, target } = itemsForCopy.pop()!;
+//         if (typeof item === 'object' && item) {
+//             for (let key in item) {
+//                 if (!item.hasOwnProperty(key)) {
+//                     continue;
+//                 }
+//                 const value = item[key];
+//                 if (isPrimitive(value)) {
+//                     target[key] = value;
+//                 } else {
+//                     itemsForCopy.push({ item: value, target: target })
+//                 }
+//             }
+//         }
+//     }
 
-    return copiedObj;
-}
+//     return copiedObj;
+// }

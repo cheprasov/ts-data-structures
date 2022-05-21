@@ -17,6 +17,8 @@ export class ObjectHelper {
         return res;
     }
 
+/// Obj => map over props
+
     static map<R, V = any, O extends { [key: string]: V } = { [key: string]: V }>(
         obj: O,
         callback: (value: V, key: keyof O, obj: O) => R,
