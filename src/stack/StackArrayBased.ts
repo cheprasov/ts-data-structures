@@ -4,23 +4,34 @@ export default class StackArrayBased<T> extends StackInterface<T> {
 
   protected _items: T[];
 
-  constructor(init?: StackArrayBased<T> | T[]) {
+  constructor(items?: T[]) {
     super();
 
     this._items = [];
-    if (init instanceof StackArrayBased) {
-      this._items.push(...init._items);
-    } else if (Array.isArray(init)) {
-      this._items.push(...init);
+
+    if (Array.isArray(items)) {
+      this._items.push(...items);
     }
   }
 
-  push(item: T): void {
-    this._items.push(item);
+  push(...items: T[]): void {
+    this._items.push(...items);
   }
 
   pop(): T | undefined {
     return this._items.pop();
+  }
+
+  getSize(): number {
+    return this._items.length;
+  }
+
+  isEmpty(): boolean {
+    return this._items.length === 0;
+  };
+
+  toArray(): T[] {
+    return [...this._items];
   }
 
 }

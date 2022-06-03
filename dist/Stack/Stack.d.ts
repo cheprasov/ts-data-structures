@@ -1,6 +1,7 @@
+import LinkedList from '../LinkedList/LinkedList';
 import StackInterface from './StackInterface';
-export default class StackArrayBased<T> extends StackInterface<T> {
-    protected _items: T[];
+export default class Stack<T> extends StackInterface<T> {
+    protected readonly _linkedList: LinkedList<T>;
     constructor(items?: T[]);
     push(...items: T[]): void;
     pop(): T | undefined;
