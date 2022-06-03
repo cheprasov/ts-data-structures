@@ -1,3 +1,4 @@
+import Queue from '../../Queue/Queue';
 
 export const levelOrderTreeTraversal = <T, R>(
     rootNode: T,
@@ -7,16 +8,15 @@ export const levelOrderTreeTraversal = <T, R>(
 ): R => {
     // todo: add level
     let result = nodeReduce(init, rootNode, /* level */);
-    // todo: replace by queue
-    const nodes = getChildren(rootNode, /* level */);
+    const nodesQueue = new Queue(getChildren(rootNode, /* level */));
 
-    while (nodes.length > 0) {
-        const node = nodes.shift();
+    while (!nodesQueue.isEmpty()) {
+        const node = nodesQueue.pop();
         if (!node) {
             continue;
         }
         result = nodeReduce(result, node, /* level */);
-        nodes.push(...getChildren(node, /* level */));
+        nodesQueue.push(...getChildren(node, /* level */));
     }
 
     return result;

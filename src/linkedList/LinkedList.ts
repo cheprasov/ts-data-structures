@@ -9,23 +9,40 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
     protected _lastNode: Nullable<LinkedListNode<T>> = null;
     protected _count: number = 0;
 
-    constructor() {
+    /**
+     * Create a new instance of LinkedList
+     *
+     * Complexity: O(1) for each item
+     */
+    constructor(items: T[] = []) {
         super();
+
+        items.forEach((item) => this.pushEnd(item));
     }
 
-    // Complexity: O(1)
-    pushBeg(item: T): void {
-        const newNode = new LinkedListNode(item);
-        if (this._firstNode) {
-            newNode.setNextNode(this._firstNode);
-        } else {
-            this._lastNode = newNode;
-        }
-        this._firstNode = newNode;
-        this._count += 1;
+    /**
+     * Adds item or items to begining of LinkedList
+     *
+     * Complexity: O(1) for each item
+     */
+    pushBeg(...items: T[]): void {
+        items.forEach((item) => {
+            const newNode = new LinkedListNode(item);
+            if (this._firstNode && this._lastNode) {
+                newNode.setNextNode(this._firstNode);
+            } else {
+                this._lastNode = newNode;
+            }
+            this._firstNode = newNode;
+            this._count += 1;
+        });
     }
 
-    // Complexity: O(1)
+    /**
+     * Removes and returns item from begining of LinkedList
+     *
+     * Complexity: O(1)
+     */
     popBeg(): T | undefined {
         if (!this._firstNode) {
             return undefined;
@@ -39,19 +56,36 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
             this._firstNode = node.getNextNode();
         }
         this._count -= 1;
+
+        return node.getData();
     }
 
-    // Complexity: O(1)
-    pushEnd(item: T): void {
-        const newNode = new LinkedListNode(item);
-        if (this._lastNode) {
-            this._lastNode.setNextNode(newNode);
-        }
-        this._lastNode = newNode;
-        this._count += 1;
+    /**
+     * Adds item or items to end of LinkedList
+     *
+     * Complexity: O(1) for each item
+     */
+    pushEnd(...items: T[]): void {
+        items.forEach((item) => {
+            const newNode = new LinkedListNode(item);
+            if (this._lastNode && this._firstNode) {
+                this._lastNode.setNextNode(newNode);
+            } else {
+                this._firstNode = newNode;
+            }
+            this._lastNode = newNode;
+            this._count += 1;
+        });
     }
 
-    // Complexity: O(n)
+    /**
+     * Removes and returns item from end of LinkedList
+     *
+     * @deprecated
+     * This method should be avoided because of the complexity
+     *
+     * Complexity: O(n)
+     */
     popEnd(): T | undefined {
         if (!this._firstNode || !this._lastNode) {
             return undefined;
@@ -81,9 +115,36 @@ export default class LinkedList<T> extends LinkedListInterface<T> {
         return node.getData();
     }
 
-    // Complexity: O(1)
+    /**
+     * Returns size of LinkedList
+     *
+     * Complexity: O(1)
+     */
     getSize(): number {
         return this._count;
     }
 
+    /**
+     * Returns TRUE if LinkedList does not have items
+     *
+     * Complexity: O(1)
+     */
+    isEmpty(): boolean {
+        return !this._firstNode && !this._lastNode;
+    }
+
+    /**
+     * Returns LinkedList's items as new array
+     *
+     * Complexity: O(n)
+     */
+    toArray() : T[] {
+        const result: T[] = [];
+        let currentNode = this._firstNode;
+        while (currentNode) {
+            result.push(currentNode.getData());
+            currentNode = currentNode.getNextNode();
+        }
+        return result;
+    }
 }
