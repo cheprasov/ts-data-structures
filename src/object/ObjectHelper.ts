@@ -1,4 +1,6 @@
-export class ObjectHelper {
+import { AnyObject, ObjectKey } from '../types/PrimitiveType';
+
+export default class ObjectHelper {
 
     static reduce<A, V = any, O extends { [key: string]: V } = { [key: string]: V }>(
         obj: O,
@@ -7,7 +9,7 @@ export class ObjectHelper {
     ): A {
         let res = initialValue;
 
-        for (let key in obj) {
+        for (const key in obj) {
             if (!obj.hasOwnProperty(key)) {
                 continue;
             }
@@ -17,7 +19,7 @@ export class ObjectHelper {
         return res;
     }
 
-/// Obj => map over props
+    // Obj => map over props
 
     static map<R, V = any, O extends { [key: string]: V } = { [key: string]: V }>(
         obj: O,
@@ -25,7 +27,7 @@ export class ObjectHelper {
     ): Record<keyof O, R> {
         const newObj = {} as Record<keyof O, R>;
 
-        for (let key in obj) {
+        for (const key in obj) {
             if (!obj.hasOwnProperty(key)) {
                 continue;
             }
@@ -41,7 +43,7 @@ export class ObjectHelper {
     ): Partial<Record<keyof O, V>> {
         const newObj = {} as Partial<Record<keyof O, V>>;
 
-        for (let key in obj) {
+        for (const key in obj) {
             if (!obj.hasOwnProperty(key)) {
                 continue;
             }
@@ -57,7 +59,7 @@ export class ObjectHelper {
         obj: O,
         callback: (value: V, key: keyof O, obj: O) => void,
     ): void {
-        for (let key in obj) {
+        for (const key in obj) {
             if (!obj.hasOwnProperty(key)) {
                 continue;
             }
@@ -69,7 +71,7 @@ export class ObjectHelper {
         obj: O,
         callback: (value: V, key: keyof O, obj: O) => boolean,
     ): boolean {
-        for (let key in obj) {
+        for (const key in obj) {
             if (!obj.hasOwnProperty(key)) {
                 continue;
             }
@@ -84,7 +86,7 @@ export class ObjectHelper {
         obj: O,
         callback: (value: V, key: keyof O, obj: O) => boolean,
     ): boolean {
-        for (let key in obj) {
+        for (const key in obj) {
             if (!obj.hasOwnProperty(key)) {
                 continue;
             }
@@ -93,6 +95,24 @@ export class ObjectHelper {
             }
         }
         return true;
+    }
+
+    /**
+     * Retuns list of keys for keys with different values
+     */
+    static diffKeysByValue<T extends AnyObject>(obj1: T, obj2: T): ObjectKey[] {
+        const changedProps: ObjectKey[] = [];
+        this.forEach(obj1, (value, key) => {
+            if (!obj2.hasOwnProperty(key) || obj2[key] !== value) {
+                changedProps.push(key);
+            }
+        });
+        this.forEach(obj2, (_, key) => {
+            if (!obj1.hasOwnProperty(key)) {
+                changedProps.push(key);
+            }
+        });
+        return changedProps;
     }
 
 }

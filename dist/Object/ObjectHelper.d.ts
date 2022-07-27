@@ -1,4 +1,5 @@
-export declare class ObjectHelper {
+import { AnyObject, ObjectKey } from '../types/PrimitiveType';
+export default class ObjectHelper {
     static reduce<A, V = any, O extends {
         [key: string]: V;
     } = {
@@ -29,4 +30,8 @@ export declare class ObjectHelper {
     } = {
         [key: string]: V;
     }>(obj: O, callback: (value: V, key: keyof O, obj: O) => boolean): boolean;
+    /**
+     * Retuns list of keys for keys with different values
+     */
+    static diffKeysByValue<T extends AnyObject>(obj1: T, obj2: T): ObjectKey[];
 }

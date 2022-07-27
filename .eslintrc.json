@@ -19,6 +19,7 @@
     "@typescript-eslint/indent": ["error", 4],
     "indent": ["error", 4, {"SwitchCase": 1}],
     "max-len": ["error", {"code": 120}],
+    "no-prototype-builtins": "off",
     "padded-blocks": ["error", { "classes": "always" }],
     "lines-between-class-members": "off",
     "class-methods-use-this": "off",
