@@ -1,4 +1,4 @@
-import { AnyObject, ObjectKey } from '../types/PrimitiveType';
+import { ObjectType, ObjectKeyType } from '../types/PrimitiveType';
 
 export default class ObjectHelper {
 
@@ -100,14 +100,21 @@ export default class ObjectHelper {
     /**
      * Retuns list of keys for keys with different values
      */
-    static diffKeysByValue<T extends AnyObject>(obj1: T, obj2: T): ObjectKey[] {
-        const changedProps: ObjectKey[] = [];
+    static diffKeysByValue<T extends ObjectType>(obj1: T, obj2: T, ignoreProps: ObjectKeyType[] = []): ObjectKeyType[] {
+        const ignorePropsSet = new Set(ignoreProps);
+        const changedProps: ObjectKeyType[] = [];
         this.forEach(obj1, (value, key) => {
+            if (ignorePropsSet.has(key)) {
+                return;
+            }
             if (!obj2.hasOwnProperty(key) || obj2[key] !== value) {
                 changedProps.push(key);
             }
         });
         this.forEach(obj2, (_, key) => {
+            if (ignorePropsSet.has(key)) {
+                return;
+            }
             if (!obj1.hasOwnProperty(key)) {
                 changedProps.push(key);
             }

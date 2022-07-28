@@ -5,8 +5,8 @@ export type PrimitiveEmptyValueType = '' | 0 | false | null | undefined;
 
 export type EmptyValueType = PrimitiveEmptyValueType | []
 
-export type ObjectKey = string | number | symbol;
+export type ObjectKeyType = string | number | symbol;
 
-export type SomeObject<T> = Record<ObjectKey, T>;
+export type SomeObjectType<T> = Record<ObjectKeyType, T>;
 
-export type AnyObject = SomeObject<any>;
+export type ObjectType = SomeObjectType<any>;

@@ -1,4 +1,4 @@
-import { AnyObject, ObjectKey } from '../types/PrimitiveType';
+import { ObjectType, ObjectKeyType } from '../types/PrimitiveType';
 export default class ObjectHelper {
     static reduce<A, V = any, O extends {
         [key: string]: V;
@@ -33,5 +33,5 @@ export default class ObjectHelper {
     /**
      * Retuns list of keys for keys with different values
      */
-    static diffKeysByValue<T extends AnyObject>(obj1: T, obj2: T): ObjectKey[];
+    static diffKeysByValue<T extends ObjectType>(obj1: T, obj2: T, ignoreProps?: ObjectKeyType[]): ObjectKeyType[];
 }

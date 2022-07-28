@@ -1,4 +1,4 @@
-import { ObjectHelper } from './ObjectHelper';
+import ObjectHelper from './ObjectHelper';
 
 describe('ObjectHelper', () => {
 
@@ -77,6 +77,38 @@ describe('ObjectHelper', () => {
             expect(ObjectHelper.diffKeysByValue(
                 { foo: 10, bar: 43, baz: 84 },
                 { foo: 10, bar: 43, baz: 84 },
+            )).toEqual([]);
+        });
+
+        it('should ignore props difference for provided props', () => {
+            expect(ObjectHelper.diffKeysByValue(
+                { foo: 10, bar: 42, baz: 84 },
+                { foo: 10, bar: 43, baz: 84 },
+                ['bar']
+            )).toEqual([]);
+
+            expect(ObjectHelper.diffKeysByValue(
+                { bar: 42, baz: 84 },
+                { foo: 10, bar: 42 },
+                ['foo']
+            )).toEqual(['baz']);
+
+            expect(ObjectHelper.diffKeysByValue(
+                {},
+                { foo: 10, bar: 42 },
+                ['foo', 'bar']
+            )).toEqual([]);
+
+            expect(ObjectHelper.diffKeysByValue(
+                { foo: 10, bar: 42 },
+                {},
+                ['bar']
+            )).toEqual(['foo']);
+
+            expect(ObjectHelper.diffKeysByValue(
+                { foo: 10, bar: 43, baz: 84 },
+                { foo: 10, bar: 43, baz: 84 },
+                []
             )).toEqual([]);
         });
     });
