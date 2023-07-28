@@ -1,1 +1,1 @@
-export { levelOrderTreeTraversal } from './Traversal/levelOrderTreeTraversal';
+export { levelOrderTreeTraversal } from './traversal/levelOrderTreeTraversal';

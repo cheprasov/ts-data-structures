@@ -1,4 +1,4 @@
-import LinkedList from '../LinkedList/LinkedList';
+import LinkedList from '../linkedList/LinkedList';
 import QueueInterface from './QueueInterface';
 export default class Queue<T> extends QueueInterface<T> {
     protected readonly _linkedList: LinkedList<T>;

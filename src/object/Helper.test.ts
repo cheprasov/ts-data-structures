@@ -1,10 +1,10 @@
-import ObjectHelper from './ObjectHelper';
+import Helper from './Helper';
 
-describe('ObjectHelper', () => {
+describe('Helper', () => {
 
     describe('reduce', () => {
         it('should iterate by all keys', () => {
-            const keys = ObjectHelper.reduce(
+            const keys = Helper.reduce(
                 { foo: 'bar', q: 42, color: 'red' },
                 (result, _, key) => {
                     result.push(key);
@@ -17,7 +17,7 @@ describe('ObjectHelper', () => {
         });
 
         it('should return correct sum of values', () => {
-            const sum = ObjectHelper.reduce(
+            const sum = Helper.reduce(
                 { foo: 100, q: 42, color: 13 },
                 (result, value) => result + value,
                 10,
@@ -27,7 +27,7 @@ describe('ObjectHelper', () => {
 
         it('should pass to callback function correct params', () => {
             const testObj: { [key: string]: any } = { foo: 'bar', q: 42, color: 'red' };
-            const counts = ObjectHelper.reduce(
+            const counts = Helper.reduce(
                 testObj,
                 (result, value, key, obj) => {
                     expect(obj).toBe(testObj);
@@ -44,7 +44,7 @@ describe('ObjectHelper', () => {
 
     describe('map', () => {
         it('should iterate by all keys and update values', () => {
-            const newObj = ObjectHelper.map(
+            const newObj = Helper.map(
                 { foo: 'bar', q: 42, test: null },
                 (value) => value + '-new',
             );
@@ -54,58 +54,58 @@ describe('ObjectHelper', () => {
 
     describe('diffKeysByValue', () => {
         it('should return keys with different values', () => {
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { foo: 10, bar: 42, baz: 84 },
                 { foo: 10, bar: 43, baz: 84 },
             )).toEqual(['bar']);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { bar: 42, baz: 84 },
                 { foo: 10, bar: 42 },
             )).toEqual(['baz', 'foo']);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 {},
                 { foo: 10, bar: 42 },
             )).toEqual(['foo', 'bar']);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { foo: 10, bar: 42 },
                 {},
             )).toEqual(['foo', 'bar']);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { foo: 10, bar: 43, baz: 84 },
                 { foo: 10, bar: 43, baz: 84 },
             )).toEqual([]);
         });
 
         it('should ignore props difference for provided props', () => {
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { foo: 10, bar: 42, baz: 84 },
                 { foo: 10, bar: 43, baz: 84 },
                 ['bar']
             )).toEqual([]);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { bar: 42, baz: 84 },
                 { foo: 10, bar: 42 },
                 ['foo']
             )).toEqual(['baz']);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 {},
                 { foo: 10, bar: 42 },
                 ['foo', 'bar']
             )).toEqual([]);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { foo: 10, bar: 42 },
                 {},
                 ['bar']
             )).toEqual(['foo']);
 
-            expect(ObjectHelper.diffKeysByValue(
+            expect(Helper.diffKeysByValue(
                 { foo: 10, bar: 43, baz: 84 },
                 { foo: 10, bar: 43, baz: 84 },
                 []

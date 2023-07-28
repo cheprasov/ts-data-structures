@@ -1,4 +1,4 @@
-import Queue from '../../Queue/Queue';
+import Queue from '../../queue/Queue';
 
 export const levelOrderTreeTraversal = <T, R>(
     rootNode: T,

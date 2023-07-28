@@ -1,6 +1,6 @@
 import { ObjectType, ObjectKeyType } from '../types/PrimitiveType';
 
-export default class ObjectHelper {
+export default class Helper {
 
     static reduce<A, V = any, O extends { [key: string]: V } = { [key: string]: V }>(
         obj: O,

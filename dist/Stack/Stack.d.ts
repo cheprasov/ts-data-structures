@@ -1,4 +1,4 @@
-import LinkedList from '../LinkedList/LinkedList';
+import LinkedList from '../linkedList/LinkedList';
 import StackInterface from './StackInterface';
 export default class Stack<T> extends StackInterface<T> {
     protected readonly _linkedList: LinkedList<T>;
