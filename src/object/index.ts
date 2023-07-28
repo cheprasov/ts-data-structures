@@ -1,1 +1,1 @@
-export { default as ObjectHelper } from './Helper';
+export { default as Helper } from './Helper';

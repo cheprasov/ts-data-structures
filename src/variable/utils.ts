@@ -19,24 +19,6 @@ export const isPrimitive = (value: any): value is PrimitiveType => {
     }
 }
 
-export const isArray = (value: any): value is PrimitiveType => {
-    switch (typeof value) {
-        case 'number':
-        case 'bigint':
-        case 'boolean':
-        case 'string':
-        case 'undefined':
-            return true;
-        case 'object':
-            if (value === null) {
-                return true;
-            }
-            return false;
-        default:
-            return false;
-    }
-}
-
 export const isNumberObject = (value: any): value is Number => {
     return value instanceof Number;
 }
