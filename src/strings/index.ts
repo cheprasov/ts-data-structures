@@ -1,0 +1,1 @@
+export { cut } from './cut';
